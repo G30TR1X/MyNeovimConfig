@@ -16,6 +16,8 @@ vim.keymap.set("n", "<F9>", function()
         cmd = string.format("gcc -g -O0 %s -o %s", file, compiled)
     elseif ext == "java" then
         cmd = string.format("javac %s", file)
+    elseif ext == "kotlin" then
+        cmd = "kotlinc *.kt -include-runtime -d Main.jar"
     else
         return
     end

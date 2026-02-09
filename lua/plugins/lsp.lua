@@ -11,7 +11,7 @@ return {
         lazy = false,
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "clangd", "basedpyright", "eslint", "superhtml", "harper_ls" },
+                ensure_installed = { "lua_ls", "clangd", "basedpyright", "eslint", "superhtml", "harper_ls", "kotlin_language_server" },
             })
         end,
         opts = {
@@ -25,18 +25,21 @@ return {
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             local lspconfig = require("lspconfig")
+            lspconfig.clangd.setup({})
+            lspconfig.superhtml.setup({})
+            lspconfig.harper_ls.setup({})
             lspconfig.lua_ls.setup({
                 capabilities = capabilities,
             })
-            lspconfig.clangd.setup({})
             lspconfig.basedpyright.setup({
                 capabilities = capabilities,
             })
             lspconfig.eslint.setup({
                 capabilities = capabilities,
             })
-            lspconfig.superhtml.setup({})
-            lspconfig.harper_ls.setup({})
+            lspconfig.kotlin_language_server.setup({
+                capabilities = capabilities,
+            })
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
